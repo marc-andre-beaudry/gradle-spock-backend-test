@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<enunciate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   xsi:noNamespaceSchemaLocation="http://enunciate.webcohesion.com/schemas/enunciate-2.2.0.xsd">
+
+	<modules>
+		<docs disabled="false" />
+
+		<!-- Projects is only using Spring-MVC with JSON -->
+		<spring-web disabled="false" />
+		<jackson disabled="false" />
+
+		<!-- Swagger UI, not functional but has a different representation of the operations -->
+		<swagger disabled="false" />
+
+		<!-- Not supporting XML -->
+		<jaxb disabled="true" />
+		<jackson1 disabled="true" />
+		<jaxws disabled="true" />
+		<jaxrs disabled="true" />
+
+		<!-- Disable all client libraries-->
+		<c-xml-client disabled="true" />
+		<csharp-xml-client disabled="true" />
+		<java-xml-client disabled="true" />
+		<java-json-client disabled="true" />
+		<gwt-json-overlay disabled="true" />
+		<obj-c-xml-client disabled="true" />
+		<php-xml-client disabled="true" />
+		<php-json-client disabled="true" />
+		<ruby-json-client disabled="true" />
+		<idl disabled="true" />
+	</modules>
+
+</enunciate>

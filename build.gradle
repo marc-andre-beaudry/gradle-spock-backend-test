@@ -1,0 +1,82 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
+    }
+}
+
+plugins {
+    id "com.webcohesion.enunciate" version "2.7.1"
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'groovy'
+apply plugin: 'org.springframework.boot'
+apply plugin: "com.webcohesion.enunciate"
+
+jar {
+    baseName = 'stock-simulation-gradle'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+compileJava {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+dependencies {
+    compileOnly("org.projectlombok:lombok:1.16.10")
+
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "spring-boot-starter-tomcat"
+    }
+    compile("org.springframework.boot:spring-boot-starter-jetty")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.boot:spring-boot-starter-mail")
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    compile("org.springframework.boot:spring-boot-starter-data-redis")
+    compile("com.zaxxer:HikariCP")
+    compile("mysql:mysql-connector-java")
+    compile("com.h2database:h2")
+    compile("com.google.guava:guava:19.0")
+    compile("ma.glasnost.orika:orika-core:1.4.5")
+    compile("org.slf4j:slf4j-api:1.7.21")
+    compile("io.projectreactor:reactor-bus")
+
+    testCompile("org.assertj:assertj-core")
+    testCompile("junit:junit")
+
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile("org.springframework:spring-test")
+
+    testCompile("org.spockframework:spock-core")
+    testCompile("org.spockframework:spock-spring")
+    testCompile("org.codehaus.groovy:groovy-all")
+    testCompile("org.mockito:mockito-core")
+    testCompile("cglib:cglib-nodep:3.2.2")
+}
+
+test {
+    include '**/*Spec.class', '**/*Test.class', '**/*SpecIT.class', '**/*IT.class'
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+tasks.enunciate {
+    File enunciateDistDir = file("src/main/resources/static/apidoc")
+    doFirst {
+        enunciateDistDir.deleteDir()
+        enunciateDistDir.mkdirs()
+    }
+    export("docs", enunciateDistDir)
+}
