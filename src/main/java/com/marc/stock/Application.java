@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.Random;
 
+import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
+
 @SpringBootApplication
 @Slf4j
 public class Application {
